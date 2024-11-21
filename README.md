@@ -44,3 +44,10 @@ Run the test suite:
 ```
 pytest
 ```
+
+## .env File:
+```
+MONGO_URI=mongodb://mongodb:27017
+FLASK_HOST=0.0.0.0
+FLASK_PORT=5000
+```
