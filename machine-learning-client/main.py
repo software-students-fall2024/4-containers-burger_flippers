@@ -27,6 +27,7 @@ print("loading whisper model...")
 model = whisper.load_model("base")
 print("whisper model sucessfully loaded!")
 
+
 # receives user audio input, creates transcriptions, adds to database
 # and returns transcription to webapp
 @app.route("/transcribe", methods=["POST"])
