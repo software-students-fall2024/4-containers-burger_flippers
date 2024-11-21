@@ -25,7 +25,8 @@ def index():
         file = request.files.get("audio")
         if file and file.filename:
             fs.put(file, filename=file.filename)
-            return "File uploaded and saved to MongoDB successfully!"
+            files = fs.list()
+            return render_template("files.html", files=files)
 
     return render_template("index.html")
 
