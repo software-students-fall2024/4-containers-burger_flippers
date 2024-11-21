@@ -23,24 +23,24 @@ A web application that allows users to upload audio files, processes them using 
 
 [Aneri Shah](https://github.com/anerivs)
 
-## Whisper API
+## [Whisper API](https://github.com/openai/whisper)
 Utilized whisper API for transcription, and required CLT ffmpeg
 
 ## How to Run the Project through Docker
 
 To run the application, open Docker Desktop and then:
-'''
+```
 docker-compose build ml-client
-'''
+```
 
 ## How to Run Unit Tests
 
 Install required libraries:
-'''
+```
 pip install flask pytest pytest-flask
-'''
+```
 
 Run the test suite:
-'''
+```
 pytest
-'''
+```
