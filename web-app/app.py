@@ -25,7 +25,6 @@ def index():
         file = request.files.get("audio")
         if file and file.filename:
             fs.put(file, filename=file.filename)
-            
             files = fs.list()
             return render_template("files.html", files=files)
 
