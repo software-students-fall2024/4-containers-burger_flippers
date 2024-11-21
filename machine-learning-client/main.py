@@ -7,7 +7,7 @@ This script connects to a MongoDB database and keeps the connection alive.
 import os
 import datetime
 import whisper
-from flask import Flask,jsonify
+from flask import Flask,jsonify, request
 import pymongo
 from dotenv import load_dotenv
 
@@ -42,7 +42,6 @@ def transcribe():
         file = request.files["file"]
         file_path = f"/tmp/{file.filename}"
         file.save(file_path)
-        
         #to test audio:
         #test_file_name = "test.mp3"
         #test_file_path = "./tmp/test.mp3"
