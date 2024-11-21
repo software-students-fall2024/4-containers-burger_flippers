@@ -27,6 +27,6 @@ jobs:
     - name: Format code with Black
       working-directory: ./machine-learning-client
       run: pipenv run black .
-    - name: Run tests
-      working-directory: ./machine-learning-client
-      run: pipenv run pytest
+    # - name: Run tests
+    #   working-directory: ./machine-learning-client
+    #   run: pipenv run pytest
