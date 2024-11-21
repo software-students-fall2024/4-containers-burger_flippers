@@ -1,9 +1,3 @@
-"""
-ML Client Script
-
-This script connects to a MongoDB database and keeps the connection alive.
-"""
-
 import os
 import datetime
 import whisper
