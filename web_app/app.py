@@ -25,8 +25,7 @@ def index():
         file = request.files.get("audio")
         if file and file.filename:
             fs.put(file, filename=file.filename)
-            files = fs.list()
-            return render_template("files.html", files=files)
+            return list_files()
 
     return render_template("index.html")
 
@@ -34,11 +33,12 @@ def index():
 @app.route("/files")
 def list_files():
     """
-    Route to list all stored audio files.
+    Route to list all stored audio files and their transcriptions.
     """
-    files = fs.list()
-    return render_template("files.html", files=files)
+    # Get transcriptions from the history collection
+    transcriptions = list(db["history"].find().sort("timestamp", -1))
+    return render_template("files.html", transcriptions=transcriptions)
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000)
+    app.run(host="0.0.0.0", port=int(os.getenv("FLASK_PORT", 5001)))
