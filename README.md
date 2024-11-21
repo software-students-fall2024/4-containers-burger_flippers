@@ -10,9 +10,9 @@ A web application that allows users to upload audio files, processes them using 
 
 ## Badges
 
-![Machine Learning Client](https://github.com/software-students-fall2024/4-containers-burger_flippers/actions/workflows/event-logger.yml/badge.svg)
+![Machine Learning Client](https://github.com/software-students-fall2024/4-containers-burger_flippers/actions/workflows/machine-learning-client.yml/badge.svg)
 
-![Web-App](https://github.com/software-students-fall2024/4-containers-burger_flippers/actions/workflows/event-logger.yml/badge.svg)
+![Web-App](https://github.com/software-students-fall2024/4-containers-burger_flippers/actions/workflows/web-app.yml/badge.svg)
 
 ## Team Members
 [Christopher Li](https://github.com/christopherlii)
