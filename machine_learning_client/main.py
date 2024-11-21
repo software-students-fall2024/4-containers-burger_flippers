@@ -19,6 +19,8 @@ flask_port = int(os.getenv("FLASK_PORT"))
 client = pymongo.MongoClient(mongo_uri)
 db = client["sensor_data"]
 
+
+
 # init flask
 app = Flask(__name__)
 
@@ -72,6 +74,7 @@ def transcribe():
 
 
 if __name__ == "__main__":
+    #mongodb connect
     print("connecting to mongodb database")
     try:
         app.run(host=flask_host, port=flask_port)
