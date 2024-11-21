@@ -1,0 +1,27 @@
+name: Web App
+on: [push, pull_request]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 
+    - uses: actions/setup-python@v3
+      with:
+        python-version: "^3.9"
+    - name: Install pipenv
+      run: pip install pipenv
+    - name: Install dependencies
+      working-directory: ./web_app
+      run: |
+        pipenv install --dev
+    - name: Run linting
+      working-directory: ./web_app
+      run: pipenv run pylint app.py
+    - name: Format code with Black
+      working-directory: ./web_app
+      run: pipenv run black .
+    # - name: Run tests
+      # working-directory: ./tests
+      # run: pipenv run pytest
