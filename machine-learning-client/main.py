@@ -5,30 +5,67 @@ This script connects to a MongoDB database and keeps the connection alive.
 """
 
 import os
-import time
+import datetime
+import whisper
+from flask import Flask,jsonify, request
 import pymongo
+from dotenv import load_dotenv
 
+#load dotenv
+load_dotenv()
 
-def main():
-    """
-    Main function to connect to MongoDB and keep the client running.
+mongo_uri = os.getenv("MONGO_URI")
+flask_host = os.getenv("FLASK_HOST")
+flask_port = int(os.getenv("FLASK_PORT"))
 
-    It connects to the MongoDB database specified by the MONGO_URI
-    environment variable
-    """
-    mongo_uri = os.getenv("MONGO_URI")
-    client = pymongo.MongoClient(mongo_uri)
-    db = client["sensor_data"]
-    print(f"Connected to MongoDB database: {db.name}")
+client = pymongo.MongoClient(mongo_uri)
+db = client["transcriptions"]
+
+#init flask
+app = Flask(__name__)
+
+#loading whisper model
+print("loading whisper model...")
+model = whisper.load_model("base")
+print("whisper model sucessfully loaded!")
+
+#receives user audio input, creates transcriptions, adds to database, and returns transcription to webapp
+@app.route("/transcribe", methods=["POST"])
+def transcribe():
     try:
-        while True:
-            print("ML client is connected and running...")
-            time.sleep(10)
-    except KeyboardInterrupt:
-        print("ML client is shutting down...")
-    finally:
-        client.close()
+        #receive user audio input
+        file = request.files["file"]
+        file_path = f"/tmp/{file.filename}"
+        file.save(file_path)
+
+        #transcribing audio file
+        print('transcribing new input...')
+        result = model.transcribe(file_path)
+        transcription = result["text"]
+        print('transcribed')
+
+        #saving transcription to database
+        data = {
+            "filename": file.filename,
+            "transcription": transcription,
+            "timestamp": datetime.datetime.now()
+        }
+        db["history"].insert_one(data)
+        print("saved transcription to history")
+
+        #return transcription
+        return jsonify({"transcription": transcription}), 200
+
+    except Exception as e:
+        print("error transcribing")
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == "__main__":
-    main()
+    print('connecting to mongodb database')
+    try:
+        app.run(host=flask_host, port=flask_port)
+    except KeyboardInterrupt: #stop if received keyboard input
+        print("detected interrupt-shutting down")
+    finally:
+        client.close()

@@ -1,12 +1,15 @@
+#base image
 FROM python:3.10-slim
 
+#working directory
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y pipenv
+#dependencies
+RUN apt-get update && apt-get install -y ffmpeg python3-pip
 
-COPY Pipfile Pipfile.lock ./
+COPY requirements.txt ./
 
-RUN pipenv install --system --deploy
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
