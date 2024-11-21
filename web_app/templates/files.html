@@ -2,15 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Stored Audio Files</title>
+    <title>Transcriptions</title>
+    <style>
+        .transcription-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .timestamp {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
-    <h2>Stored Audio Files</h2>
-    <ul>
-        {% for file in files %}
-            <li>{{ file }}</li>
+    <h2>Audio Transcriptions</h2>
+    {% if transcriptions %}
+        {% for item in transcriptions %}
+            <div class="transcription-item">
+                <p><strong>File:</strong> {{ item.filename }}</p>
+                <p><strong>Transcription:</strong> {{ item.transcription }}</p>
+                <p class="timestamp">Recorded: {{ item.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+            </div>
         {% endfor %}
-    </ul>
+    {% else %}
+        <p>No transcriptions found.</p>
+    {% endif %}
     <a href="/"><button>Upload another audio file</button></a>
 </body>
 </html>

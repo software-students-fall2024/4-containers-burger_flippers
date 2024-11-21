@@ -14,7 +14,7 @@ RUN pipenv install --system --deploy
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 5001
 
 ENV FLASK_ENV=production
 
