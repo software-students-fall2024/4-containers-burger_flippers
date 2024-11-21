@@ -74,7 +74,7 @@ if __name__ == "__main__":
     print("connecting to mongodb database")
     try:
         app.run(host=flask_host, port=flask_port)
-    except KeyboardInterrupt: # stop if received keyboard input
+    except KeyboardInterrupt:
         print("detected interrupt-shutting down")
     finally:
         client.close()
