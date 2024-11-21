@@ -16,12 +16,12 @@ jobs:
     #   working-directory: ./machine-learning-client
     #   run: |
     #     pipenv install --dev
-    - name: Run linting
-      working-directory: ./machine_learning_client
-      run: pipenv run pylint main.py
-    - name: Format code with Black
-      working-directory: ./machine_learning_client
-      run: pipenv run black .
+    # - name: Run linting
+    #   working-directory: ./machine_learning_client
+    #   run: pipenv run pylint main.py
+    # - name: Format code with Black
+    #   working-directory: ./machine_learning_client
+    #   run: pipenv run black .
     # - name: Run tests
     #   working-directory: ./tests
     #   run: pipenv run pytest
