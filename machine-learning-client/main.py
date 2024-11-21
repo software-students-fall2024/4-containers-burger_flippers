@@ -1,3 +1,7 @@
+"""
+Accepts user audio input, creates a transcription, and sends it back to the webapp client
+"""
+
 import os
 import datetime
 import whisper
@@ -5,9 +9,6 @@ from flask import Flask,jsonify, request
 import pymongo
 from dotenv import load_dotenv
 
-"""
-Accepts user audio input, creates a transcription, and sends it back to the webapp client
-"""
 #load dotenv
 load_dotenv()
 
