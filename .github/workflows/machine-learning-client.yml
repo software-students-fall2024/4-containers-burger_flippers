@@ -1,10 +1,5 @@
 name: Machine Learning Client
-on:
-  push:
-    branches: [main, master]
-  pull_request:
-    types: [opened, closed]
-    branches: [main, master]
+on: [push, pull_request]
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
